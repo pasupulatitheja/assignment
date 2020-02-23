@@ -1,0 +1,23 @@
+views.py
+from django.shortcuts import render
+from .forms import NumberForm
+
+
+# Create your views here.
+def showmain(request):
+    nf=NumberForm()
+    return render(request,"index.html",{"form":nf})
+
+def saveindex(request):
+    f1=request.POST.get("firstnumber")
+    f2=request.POST.get("secondnumber")
+
+    data=f1+f2
+    return render(request,"index.html",{"message":data})
+
+
+from django import forms
+
+class NumberForm(forms.Form):
+    firstnumber=forms.IntegerField(max_value=999999999,max_value=1,label="FirstNumber")
+    secondnumber=forms.IntegerField(max_value=99999999,min_value=1,label="SecondNumber")
